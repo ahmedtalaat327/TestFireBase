@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFireBase", "TestFireBase.csproj", "{53719F6F-8861-4EFD-85DA-2C9473546287}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireBaseAsDModel", "FireBaseAsDModel.csproj", "{53719F6F-8861-4EFD-85DA-2C9473546287}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

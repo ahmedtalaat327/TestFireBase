@@ -8,7 +8,7 @@ using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
 
-namespace TestFireBase
+namespace FireBaseAsDModel
 {
     internal class Program
     {
@@ -21,7 +21,7 @@ namespace TestFireBase
 
             };
 
-            MakeConnectionAuth("",iconfigB);
+            MakeConnectionAuth("MyUsers",iconfigB);
 
             Console.ReadLine();
         }
@@ -49,7 +49,7 @@ namespace TestFireBase
             Console.WriteLine("next user id " + iD_next);
 
 
-            if (Create User(cl, $"{dblistName}",iD_next) == "-1")
+            if (CreateUser(cl, $"{dblistName}",iD_next) == "-1")
                 Console.WriteLine("error not added");
             else Console.WriteLine("added ^^");
 
@@ -60,7 +60,7 @@ namespace TestFireBase
         private static string CreateUser(FirebaseClient client,string dblistName, int nextid)
         {
             User us1 = new User() { 
-            Id = nextid, Email="dfwf@wfw.com",Name="test1",Password = "99999"
+            Id = nextid, Email="ppxxxxxxx.com",Name="xxxxxxxx",Password = "tttttttt"
             };
 
             try
