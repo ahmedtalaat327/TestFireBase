@@ -3,15 +3,14 @@ using FireSharp.Config;
 using FireSharp.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Management.Instrumentation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireBaseAsDModel
 {
     public class QuickieFireBaseScripts
     {
+        #region Members 
+        FirebaseClient firebaseClient = null;
+        #endregion
 
         #region ctor 
         /// <summary>
@@ -56,7 +55,7 @@ namespace FireBaseAsDModel
         /// connect to secure db using configuration already set
         /// </summary>
         /// <param name="firebaseConfig">fb configuration</param>
-        /// <returns></returns>
+        /// <returns>any int number greater than -1 if successfull</returns>
         public int ConnectToServer(IFirebaseConfig firebaseConfig)
         {
 
@@ -69,6 +68,7 @@ namespace FireBaseAsDModel
                 try
                 {
                     cl = new FirebaseClient(firebaseConfig);
+                    firebaseClient = cl;
                     return 0;
 
                 }
@@ -79,6 +79,28 @@ namespace FireBaseAsDModel
                 }
             }
                  
+        }
+        /// <summary>
+        /// trying too gt the max no of list
+        /// </summary>
+        /// <typeparam name="T">Data Type of these lists</typeparam>
+        /// <param name="dblistName">current list name inside firebaase db cloud</param>
+        /// <returns>max count if fails will be zero!</returns>
+        private int GetMaxID<T>(string dblistName)
+        {
+            try
+            {
+                var getter = firebaseClient.Get(dblistName + "/");
+
+                var result = getter.ResultAs<List<T>>();
+
+                return result.Count - 1;
+            }
+            catch (Exception er)
+            {
+                return 0;
+
+            }
         }
         #endregion
     }
