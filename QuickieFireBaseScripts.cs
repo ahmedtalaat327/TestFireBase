@@ -1,11 +1,14 @@
-﻿using FireSharp.Config;
+﻿using FireSharp;
+using FireSharp.Config;
+using FireSharp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestFireBase
+namespace FireBaseAsDModel
 {
     public class QuickieFireBaseScripts
     {
@@ -24,10 +27,10 @@ namespace TestFireBase
         #endregion
         #region Helpers Methods
         /// <summary>
-        /// 
+        /// Make my custom configs
         /// </summary>
-        /// <param name="secretKey"></param>
-        /// <param name="urlPath"></param>
+        /// <param name="secretKey">secet key captured by FB sys</param>
+        /// <param name="urlPath">url hash</param>
         /// <returns></returns>
         private FirebaseConfig MakeConnectionConfigs(string secretKey,string urlPath)
         {
@@ -42,12 +45,40 @@ namespace TestFireBase
 
             if(_iconfig.RequestTimeout>new TimeSpan(5000))
             {
-                return new FirebaseConfig() { };
+                return MakeConnectionConfigs(secretKey,urlPath);
             }
             else
             {
                 return _iconfig;
             }
+        }
+        /// <summary>
+        /// connect to secure db using configuration already set
+        /// </summary>
+        /// <param name="firebaseConfig">fb configuration</param>
+        /// <returns></returns>
+        public int ConnectToServer(IFirebaseConfig firebaseConfig)
+        {
+
+
+            if (firebaseConfig == null)
+                return -1;
+            else
+            {
+                FirebaseClient cl = null;
+                try
+                {
+                    cl = new FirebaseClient(firebaseConfig);
+                    return 0;
+
+                }
+                catch (Exception er)
+                {
+                    Console.WriteLine(er.Message);
+                    return -1;
+                }
+            }
+                 
         }
         #endregion
     }

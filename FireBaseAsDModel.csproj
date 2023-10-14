@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{53719F6F-8861-4EFD-85DA-2C9473546287}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TestFireBase</RootNamespace>
-    <AssemblyName>TestFireBase</AssemblyName>
+    <RootNamespace>FireBaseAsDModel</RootNamespace>
+    <AssemblyName>FireBaseAsDModel</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
