@@ -130,6 +130,17 @@ namespace FireBaseAsDModel
 
 
         }
+        /// <summary>
+        /// getting data as object from current node
+        /// </summary>
+        /// <typeparam name="T">datatype you actually used in db cloud system as node</typeparam>
+        /// <param name="dblistName">name of list</param>
+        /// <param name="currentlyid">key to be used as integer number</param>
+        /// <returns></returns>
+        public T PullNodeAsObject<T>(string dblistName,int currentlyid) where T: new() {
+
+            return new T();
+        }
         #endregion
     }
 }

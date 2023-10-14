@@ -32,16 +32,34 @@ namespace FireBaseAsDModel
                 "Wj2pfAtfyrGWtIC7kW7fp33Z5AISS7A5r179XZhV",
                 "https://mriuserprofile-default-rtdb.firebaseio.com/"
                 );
-            quickieFireBaseScripts.ConnectToServer(quickieFireBaseScripts.firebaseConfigs);
+
+
+            if (quickieFireBaseScripts.ConnectToServer(quickieFireBaseScripts.firebaseConfigs) > -1)
+                Console.WriteLine("Connected to Firebase successfully");
+            else
+                Console.WriteLine("Connecting to Firebase failed!");
+
 
             //caluculated max id
             var index = quickieFireBaseScripts.GetMaxID<User>("MyUsers");
+            Console.WriteLine("Next Id is: "+(index+1));
+
+
+
             //create object
             User usr_obj = new User() {
                 Id = index + 1, Name = "Ahmed Talaat Mohamed", Email = "a.talaat@jooo.com", Password = "qh199"
             };
+            Console.WriteLine("trying to add new user ...");
 
-            quickieFireBaseScripts.PushNewNode<User>("MyUsers", usr_obj.Id, usr_obj);
+            if(quickieFireBaseScripts.PushNewNode<User>("MyUsers", usr_obj.Id, usr_obj)=="-1")
+                Console.WriteLine("User successfuly added to database cloud system.");
+            else
+            {
+                Console.WriteLine("Failed to add anything");
+                return;
+            }
+            Console.ReadLine();
         }
         private static void MakeConnectionAuth(string dblistName, IFirebaseConfig firebaseConfig)
         {
