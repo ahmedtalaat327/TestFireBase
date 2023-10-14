@@ -10,6 +10,7 @@ namespace FireBaseAsDModel
     {
         #region Members 
         FirebaseClient firebaseClient = null;
+        public FirebaseConfig firebaseConfigs = null;
         #endregion
 
         #region ctor 
@@ -21,7 +22,7 @@ namespace FireBaseAsDModel
         /// <param name="path">hash to db</param>
         public QuickieFireBaseScripts(string currentDBListSecretCode, string path) {
             //call this async methods with error maybe called
-            MakeConnectionConfigs(currentDBListSecretCode, path);   
+            firebaseConfigs = MakeConnectionConfigs(currentDBListSecretCode, path);   
         }
         #endregion
         #region Helpers Methods
@@ -86,7 +87,7 @@ namespace FireBaseAsDModel
         /// <typeparam name="T">Data Type of these lists</typeparam>
         /// <param name="dblistName">current list name inside firebaase db cloud</param>
         /// <returns>max count if fails will be zero!</returns>
-        private int GetMaxID<T>(string dblistName)
+        public int GetMaxID<T>(string dblistName)
         {
             try
             {
@@ -101,6 +102,33 @@ namespace FireBaseAsDModel
                 return 0;
 
             }
+        }
+        /// <summary>
+        /// pushing new node to tree
+        /// </summary>
+        /// <typeparam name="T">type of object</typeparam>
+        /// <param name="dblistName">name of list in cloud </param>
+        /// <param name="nextid">calcualted next id for current node will be added</param>
+        /// <param name="nodeObj">node object</param>
+        /// <returns></returns>
+        public string PushNewNode<T>(string dblistName, int nextid, T nodeObj)
+        {
+            
+
+            try
+            {
+                var setter = firebaseClient.Set<T>(dblistName + "/" + nextid, nodeObj);
+
+                return setter.StatusCode.ToString();
+            }
+            catch (Exception er)
+            {
+                return "-1";
+
+            }
+
+
+
         }
         #endregion
     }

@@ -14,6 +14,7 @@ namespace FireBaseAsDModel
     {
         static void Main(string[] args)
         {
+            /*
             FirebaseConfig iconfigB = new FirebaseConfig() { 
             
             AuthSecret = "Wj2pfAtfyrGWtIC7kW7fp33Z5AISS7A5r179XZhV",
@@ -24,6 +25,23 @@ namespace FireBaseAsDModel
             MakeConnectionAuth("MyUsers",iconfigB);
 
             Console.ReadLine();
+            */
+
+
+            QuickieFireBaseScripts quickieFireBaseScripts = new QuickieFireBaseScripts(
+                "Wj2pfAtfyrGWtIC7kW7fp33Z5AISS7A5r179XZhV",
+                "https://mriuserprofile-default-rtdb.firebaseio.com/"
+                );
+            quickieFireBaseScripts.ConnectToServer(quickieFireBaseScripts.firebaseConfigs);
+
+            //caluculated max id
+            var index = quickieFireBaseScripts.GetMaxID<User>("MyUsers");
+            //create object
+            User usr_obj = new User() {
+                Id = index + 1, Name = "Ahmed Talaat Mohamed", Email = "a.talaat@jooo.com", Password = "qh199"
+            };
+
+            quickieFireBaseScripts.PushNewNode<User>("MyUsers", usr_obj.Id, usr_obj);
         }
         private static void MakeConnectionAuth(string dblistName, IFirebaseConfig firebaseConfig)
         {
